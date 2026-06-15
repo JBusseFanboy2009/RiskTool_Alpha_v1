@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{ app_name }}</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-slate-100 text-slate-900">
+  <div class="min-h-screen flex">
+    <aside class="w-64 bg-slate-900 text-white p-4 space-y-3">
+      <h1 class="text-xl font-bold">MyShares</h1>
+      <nav class="space-y-2" id="sidebar">
+        <button type="button" class="nav-btn w-full text-left p-2 rounded text-slate-200 hover:bg-slate-800 transition-colors" data-route="dashboard">Portfolio Overview</button>
+        <button type="button" class="nav-btn w-full text-left p-2 rounded text-slate-200 hover:bg-slate-800 transition-colors" data-route="myshares">MyShares</button>
+        <button type="button" class="nav-btn w-full text-left p-2 rounded text-slate-200 hover:bg-slate-800 transition-colors" data-route="riskometer">Risiko-O-Meter</button>
+        <button type="button" class="nav-btn w-full text-left p-2 rounded text-slate-200 hover:bg-slate-800 transition-colors" data-route="volatility">Volatility</button>
+        <button type="button" class="nav-btn w-full text-left p-2 rounded text-slate-200 hover:bg-slate-800 transition-colors" data-route="correlation">Correlation Heatmap</button>
+        <button type="button" class="nav-btn w-full text-left p-2 rounded text-slate-200 hover:bg-slate-800 transition-colors" data-route="drawdown">Maximum Drawdown</button>
+        <button type="button" class="nav-btn w-full text-left p-2 rounded text-slate-200 hover:bg-slate-800 transition-colors" data-route="var">VaR & CVaR</button>
+        <button type="button" class="nav-btn w-full text-left p-2 rounded text-slate-200 hover:bg-slate-800 transition-colors" data-route="stress">Stress Testing</button>
+      </nav>
+      <button id="logoutBtn" class="w-full p-2 mt-8 rounded bg-red-600 hidden">Logout</button>
+    </aside>
+    <main class="flex-1 p-6">
+      <div id="authView" class="max-w-md mx-auto bg-white rounded-xl shadow p-6">
+        <h2 class="text-lg font-semibold mb-4">Login / Registrierung</h2>
+        <input id="email" type="email" placeholder="E-Mail" class="w-full border rounded p-2 mb-3" />
+        <input id="password" type="password" placeholder="Passwort" class="w-full border rounded p-2 mb-3" />
+        <div class="flex gap-2">
+          <button id="loginBtn" class="px-4 py-2 rounded bg-slate-900 text-white">Login</button>
+          <button id="registerBtn" class="px-4 py-2 rounded bg-slate-600 text-white">Registrieren</button>
+        </div>
+        <p id="authMsg" class="text-sm mt-3"></p>
+      </div>
+      <div id="appView" class="hidden">
+        <div id="content"></div>
+      </div>
+    </main>
+  </div>
+  <script src="/static/js/app.js"></script>
+</body>
+</html>
