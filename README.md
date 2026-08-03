@@ -1,31 +1,56 @@
-# MyShares - Finance & Risk Analysis App (Scaffold)
+# MyShares — Portfolio & Risiko-Analyse (Streamlit)
 
-## Start
+Portfolio-Dashboard mit yfinance-Marktdaten, Struktur-Analyse und Risiko-Tools.
+
+## Lokal starten
 
 ```bash
 python3 -m venv .venv
-source .venv/bin/activate
+source .venv/bin/activate   # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
-uvicorn app.main:app --reload
+streamlit run streamlit_app.py
 ```
 
-Open `http://127.0.0.1:8000`.
+Öffne die URL aus der Konsole (standardmäßig `http://localhost:8501`).
 
-## Current Scope
+## Auf share.streamlit.io veröffentlichen
 
-- FastAPI backend with modular routers (`auth`, `positions`, `portfolio`, `market`, `risk`)
-- SQLite + SQLAlchemy models for users, portfolios, positions, instrument mappings, market cache
-- JWT login/register flow
-- SPA shell with sidebar navigation
-- Portfolio overview pie chart and MyShares management
-- Position detail with price chart and structure analysis endpoint
-- Risk endpoints: Risk-O-Meter, Volatility, Correlation, Maximum Drawdown, VaR/CVaR, Stress test
-- Basic market-data cache in SQLite for quote/history calls
+1. Repository auf GitHub pushen
+2. Auf [share.streamlit.io](https://share.streamlit.io) einloggen → **New app**
+3. Repository, Branch und **Main file path** eintragen:
 
-## Next Step Suggestions
+   **`streamlit_app.py`**
 
-- Add Alembic migrations
-- Improve ISIN-to-Ticker mapping persistence and exchange normalization
-- Add robust ETF holdings parsing (multiple Yahoo structures)
-- Add test suite (unit + API)
-- Harden auth/session handling for production
+4. **Deploy** klicken
+
+### Optional: Secrets (Produktion)
+
+Unter *App settings → Secrets* z. B.:
+
+```toml
+SECRET_KEY = "dein-langer-zufalls-string"
+```
+
+Die App liest `SECRET_KEY` über `app/config.py` (Umgebungsvariable / `.env`).
+
+## Hauptdatei
+
+| Zweck | Pfad |
+|--------|------|
+| **Streamlit Entry Point (für Cloud)** | `streamlit_app.py` |
+| UI-Seiten | `app/ui/` |
+| Business-Logik | `app/services/` |
+| Risiko-Berechnungen | `app/analytics/` |
+
+## Features
+
+- Login / Registrierung (SQLite)
+- Portfolio-Übersicht mit Allokations-Chart
+- MyShares: Positionen verwalten, Detail-Analyse, Sektor/Holdings-Charts
+- Risiko-O-Meter (Gauge), Volatilität, Korrelations-Heatmap
+- Drawdown-Verlauf, VaR/CVaR-Histogramme
+- Branchen-spezifisches Stress-Testing
+
+## Hinweis zur Datenbank
+
+Auf Streamlit Cloud ist die SQLite-Datei (`myshares.db`) an den Container gebunden und kann bei Redeploys zurückgesetzt werden — für Demos ausreichend.
